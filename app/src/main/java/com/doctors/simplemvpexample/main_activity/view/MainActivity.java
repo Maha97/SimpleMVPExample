@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         presenter = new MainActivityPresenter(this);
 
         initProgressBar();
-        
+
         addListenerToEmailEditText();
         addListenerToUserNameEditText();
 
@@ -71,6 +71,29 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     }
 
     private void addListenerToEmailEditText() {
+
+        mEmailEdtxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                presenter.updateEmail(charSequence.toString());
+                Log.d(TAG, "onTextChanged");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                hideProgressBar();
+                Log.d(TAG, "afterTextChanged");
+            }
+        });
+
+
+
+
 
     }
 

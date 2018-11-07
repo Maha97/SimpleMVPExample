@@ -17,16 +17,14 @@ public class MainActivityPresenter {
     }
 
 
-
-
     public  void updateEmail(String email){
       user.setEmail(email);
-      presenterInterface.updateUi(email);
+      presenterInterface.updateUi(user.toString());
 
     }
     public void updateFullName(String fullName){
       user.setFullName(fullName);
-      presenterInterface.updateUi(fullName);
+      presenterInterface.updateUi(user.toString());
 
     }
 
