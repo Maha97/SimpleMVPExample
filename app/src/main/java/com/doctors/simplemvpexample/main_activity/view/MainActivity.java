@@ -86,8 +86,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
                 mFavouriteFruit=mfruitEdtxt.getText().toString();
 
                  if(!TextUtils.isEmpty(mUserName)&&!TextUtils.isEmpty(mFavouriteFruit) ){
-                    presenter.shareUserData(MainActivity.this,mUserName,mFavouriteFruit);
-                    Log.d(TAG,"FAB Clicked");
+                     shareData();
+                     Log.d(TAG,"FAB Clicked");
                  }
 
             }
@@ -154,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
     @Override
     public void shareData() {
+        presenter.shareUserData(MainActivity.this,mUserName,mFavouriteFruit);
 
     }
 }
