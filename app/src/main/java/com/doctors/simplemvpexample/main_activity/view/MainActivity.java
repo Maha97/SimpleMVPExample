@@ -19,15 +19,13 @@ import com.doctors.simplemvpexample.main_activity.presenter.MainActivityPresente
 public class MainActivity extends AppCompatActivity implements MainActivityPresenter.View {
 
 
+    private final String TAG = MainActivity.class.getSimpleName();
     private TextView mUserDataTextView;
     private EditText mNameEdtxt;
     private EditText mEmailEdtxt;
-
     private ProgressBar mProgressBar;
     private MainActivityPresenter presenter;
 
-
-    private final String TAG=MainActivity.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +38,17 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         mUserDataTextView = findViewById(R.id.tv_user_data);
         mNameEdtxt = findViewById(R.id.et_user_name);
         mEmailEdtxt = findViewById(R.id.et_user_email);
-        mProgressBar=findViewById(R.id.progress_bar);
+        mProgressBar = findViewById(R.id.progress_bar);
         presenter = new MainActivityPresenter(this);
 
-
         initProgressBar();
+        
+        addListenerToEmailEditText();
+        addListenerToUserNameEditText();
 
+    }
 
+    private void addListenerToUserNameEditText() {
         mNameEdtxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -55,34 +57,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-             presenter.updateFullName(charSequence.toString());
-                Log.d(TAG,"onTextChanged");
+                presenter.updateFullName(charSequence.toString());
+                Log.d(TAG, "onTextChanged");
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-              hideProgressBar();
-                Log.d(TAG,"afterTextChanged");
-            }
-           });
-
-         mEmailEdtxt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                presenter.updateEmail(s.toString());
-                Log.d(TAG,"onTextChanged");
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
                 hideProgressBar();
-                Log.d(TAG,"afterTextChanged");
+                Log.d(TAG, "afterTextChanged");
             }
         });
+
+    }
+
+    private void addListenerToEmailEditText() {
 
     }
 
