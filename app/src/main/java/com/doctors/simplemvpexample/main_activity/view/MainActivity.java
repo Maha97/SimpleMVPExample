@@ -2,9 +2,11 @@ package com.doctors.simplemvpexample.main_activity.view;
 
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -22,10 +24,13 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     private final String TAG = MainActivity.class.getSimpleName();
     private TextView mUserDataTextView;
     private EditText mNameEdtxt;
-    private EditText mEmailEdtxt;
+    private EditText mfruitEdtxt;
     private ProgressBar mProgressBar;
     private MainActivityPresenter presenter;
+    private FloatingActionButton mShareFab;
 
+    private String mUserName="";
+    private String mFavouriteFruit="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +42,16 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
         // Bind Views
         mUserDataTextView = findViewById(R.id.tv_user_data);
         mNameEdtxt = findViewById(R.id.et_user_name);
-        mEmailEdtxt = findViewById(R.id.et_user_email);
+        mfruitEdtxt = findViewById(R.id.et_user_fruit);
         mProgressBar = findViewById(R.id.progress_bar);
+        mShareFab=findViewById(R.id.fab);
         presenter = new MainActivityPresenter(this);
 
         initProgressBar();
-
-        addListenerToEmailEditText();
+        // Actions
+        addListenerTofruitEditText();
         addListenerToUserNameEditText();
-
+        onShareFloatingButtonClicked();
     }
 
     private void addListenerToUserNameEditText() {
@@ -70,9 +76,27 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
     }
 
-    private void addListenerToEmailEditText() {
 
-        mEmailEdtxt.addTextChangedListener(new TextWatcher() {
+
+    private  void onShareFloatingButtonClicked(){
+        mShareFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mUserName=mNameEdtxt.getText().toString();
+                mFavouriteFruit=mfruitEdtxt.getText().toString();
+
+                 if(!TextUtils.isEmpty(mUserName)&&!TextUtils.isEmpty(mFavouriteFruit) ){
+                    presenter.shareUserData(MainActivity.this,mUserName,mFavouriteFruit);
+                    Log.d(TAG,"FAB Clicked");
+                 }
+
+            }
+        });
+    }
+
+    private void addListenerTofruitEditText() {
+
+        mfruitEdtxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -80,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                presenter.updateEmail(charSequence.toString());
+                presenter.updatefruit(charSequence.toString());
                 Log.d(TAG, "onTextChanged");
             }
 
@@ -126,5 +150,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityPrese
     @Override
     public void hideProgressBar() {
         mProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void shareData() {
+
     }
 }

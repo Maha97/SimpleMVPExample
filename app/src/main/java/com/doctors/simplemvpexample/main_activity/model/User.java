@@ -2,14 +2,14 @@ package com.doctors.simplemvpexample.main_activity.model;
 
 public class User {
 
-    private String fullName = "", email = "";
+    private String fullName = "", fruit = "";
 
     public User() {
     }
 
-    public User(String fullName, String email) {
+    public User(String fullName, String fruit) {
         this.fullName = fullName;
-        this.email = email;
+        this.fruit = fruit;
     }
 
     public String getFullName() {
@@ -20,16 +20,16 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getfruit() {
+        return fruit;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setfruit(String fruit) {
+        this.fruit = fruit;
     }
 
     @Override
     public String toString() {
-        return "Email : " + email + "\nFullName : " + fullName;
+        return "You Rock " + ""+fullName +"" +"\n You Like  : " +fruit +"\n  Great !" ;
     }
 }

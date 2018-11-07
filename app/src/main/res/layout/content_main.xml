@@ -23,8 +23,6 @@
         app:layout_constraintVertical_bias="1.0">
 
 
-
-
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
@@ -40,7 +38,10 @@
         <TextView
             android:id="@+id/tv_user_data"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:padding="@dimen/horizental_margin"
             android:layout_margin="@dimen/horizental_margin"
             android:gravity="center" />
 
@@ -51,16 +52,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/horizental_margin"
             android:ems="10"
-            android:hint="Enter your name"
+            android:hint="Hey ! What is your Name?"
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/et_user_email"
+            android:id="@+id/et_user_fruit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/horizental_margin"
             android:ems="10"
-            android:hint="Name"
+            android:hint="What is your Favourite fruit, Please tell me?"
 
             android:inputType="textEmailAddress" />
 
